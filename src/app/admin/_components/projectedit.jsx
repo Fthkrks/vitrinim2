@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../config/firebaseConfig";
 import Swal from "sweetalert2";
-import { DragDropContext } from 'react-beautiful-dnd';
 
 
 function ProjectEdit({ startupDetails, refreshData }) {
@@ -104,13 +103,10 @@ function ProjectEdit({ startupDetails, refreshData }) {
     });
   };
 
-  const handleOnDragEnd = () =>{
 
-  }
 
   return (
     <div className="mt-10">
-      <DragDropContext onDragEnd ={handleOnDragEnd}>
         {startupDetails.map((startup, index) => (
           <div
             key={index}
@@ -292,7 +288,6 @@ function ProjectEdit({ startupDetails, refreshData }) {
             </div>
           </div>
         ))}
-      </DragDropContext>
     </div>
   );
 }
