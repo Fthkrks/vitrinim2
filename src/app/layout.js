@@ -1,14 +1,15 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import {
-  ClerkProvider,
-} from '@clerk/nextjs'
-import Database from "../lib/mongodb"
+import { ClerkProvider } from "@clerk/nextjs";
+import Database from "../lib/mongodb";
 import { Toaster } from "react-hot-toast";
+import { TwicInstall } from "@twicpics/components/react";
+import "@twicpics/components/style.css";
+
+
+
+
 const inter = Inter({ subsets: ["latin"] });
-
-
-
 
 export const metadata = {
   title: "Create Next App",
@@ -16,19 +17,20 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
           <div data-theme="dark" className=" h-screen">
+            <TwicInstall
+              // domain is mandatory
+              domain="https://vitrinim.twic.pics"
+            />
             {children}
           </div>
           <Toaster />
         </body>
-
       </html>
-
     </ClerkProvider>
   );
 }

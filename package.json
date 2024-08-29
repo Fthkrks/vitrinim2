@@ -11,13 +11,18 @@
   "dependencies": {
     "@clerk/elements": "^0.14.0",
     "@clerk/nextjs": "^5.3.3",
+    "@twicpics/components": "^0.30.0",
     "axios": "^1.7.5",
     "chalk": "^4.1.2",
+    "firebase": "^10.13.0",
+    "lucide-react": "^0.436.0",
     "mongoose": "^8.5.4",
     "next": "14.2.6",
     "react": "^18",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "sweetalert2": "^11.12.4"
   },
   "devDependencies": {
     "@types/node": "22.5.0",

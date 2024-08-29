@@ -45,7 +45,6 @@ function CreateUsername() {
       return
     };
     axios.post(`${APP_URL}/user`, {username, fullname, email}).then(res =>{
-      console.log(res);
       return res.data;
     }).catch(err =>{
       console.log(err);
