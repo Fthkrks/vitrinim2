@@ -10,11 +10,8 @@ export async function GET(req) {
     await Database;
     const emailRef = req.nextUrl.searchParams.get("email");
 
-    if (!emailRef) {
-      throw new CustomError(Enum.HTTP_CODES.BAD_REQUEST, "Email is required");
-    }
 
-    const startup = await Startups.find({ emailRef });
+    const startup = await Startups.find({ emailRef }).sort({ order: 1 });
     return NextResponse.json(
       Response.successResponse({ success: true, startup })
     );
@@ -25,8 +22,23 @@ export async function GET(req) {
 
 export async function POST(req) {
   let body = await req.json();
+
   try {
     await Database;
+
+    if (!body.email) {
+      return NextResponse.json(
+        Response.errorResponse(
+          new CustomError(
+            Enum.HTTP_CODES.BAD_REQUEST,
+            "Validation Error!",
+            "Email is required for this startup."
+          )
+        ),
+        { status: Enum.HTTP_CODES.BAD_REQUEST } // HTTP 400 durum kodunu ayarlıyoruz
+      );
+    }
+
     const startup = await new Startups({
       url: body.url,
       emailRef: body.email,
@@ -37,7 +49,7 @@ export async function POST(req) {
       Response.successResponse({ success: true, startup })
     );
   } catch (error) {
-    return NextResponse.json(Response.errorResponse(error));
+    return NextResponse.json(Response.errorResponse(error), { status: error.statusCode || 500 });
   }
 }
 
@@ -51,7 +63,7 @@ export async function PUT(req) {
       throw new CustomError(
         Enum.HTTP_CODES.BAD_REQUEST,
         "Validition error!",
-        "projectId not found! this error startups put"
+        "startupId not found! this error startups put"
       );
     }
 
@@ -61,8 +73,9 @@ export async function PUT(req) {
     if (body.desc) updates.desc = body.desc;
     if (body.category) updates.category = body.category;
     if (body.logo) updates.logo = body.logo + "?alt=media";
-    if(body.banner) updates.banner = body.banner + "?alt=media";
+    if (body.banner) updates.banner = body.banner + "?alt=media";
     if (typeof body.active === "boolean") updates.active = body.active;
+    if (body.order !== undefined) updates.order = body.order;
 
     const startup = await Startups.updateOne({ _id: body.id }, updates);
 
@@ -75,8 +88,8 @@ export async function PUT(req) {
 }
 
 export async function DELETE(req) {
-  const id = req.nextUrl.searchParams.get('id');
-  
+  const id = req.nextUrl.searchParams.get("id");
+
   try {
     await Database;
     if (!id) {
@@ -87,7 +100,6 @@ export async function DELETE(req) {
       );
     }
 
-    
     const startup = await Startups.findOneAndDelete({ _id: id });
 
     return NextResponse.json(
@@ -97,4 +109,3 @@ export async function DELETE(req) {
     return NextResponse.json(Response.errorResponse(error));
   }
 }
-

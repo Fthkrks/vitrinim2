@@ -19,7 +19,7 @@ function CreateUsername() {
     if (user) {
       const checkUser = async () => {
          axios.get(`${APP_URL}/user`).then(result =>{
-          const data = result.data.data                    
+          const data = result.data.data.user                    
           if(data !== null){            
             router.replace("/admin")
           }          
@@ -45,12 +45,12 @@ function CreateUsername() {
       return
     };
     axios.post(`${APP_URL}/user`, {username, fullname, email}).then(res =>{
-      return res.data;
+      router.replace("/admin")
+
     }).catch(err =>{
       console.log(err);
       
     })
-    router.replace("/admin")
 
 
   }

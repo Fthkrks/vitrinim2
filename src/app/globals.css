@@ -31,3 +31,8 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Global CSS */
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari ve Opera */
+}

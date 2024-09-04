@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
     bio: {type: String, default: ""},
     location: {type: String, default: ""},
     revenue: {type: Number, default: null},
+    theme: {type: String, default: "light"}
 });
 
 const UserModel = mongoose.models.Users || mongoose.model('Users', schema);

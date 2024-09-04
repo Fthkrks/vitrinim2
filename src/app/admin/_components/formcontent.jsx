@@ -20,6 +20,7 @@ function FormContent() {
 
   const GetProjectList = async()=>{
     axios.get(`${APP_URL}/startups` ,{params: {email}}).then(res =>{
+      
       setStartupDetails(res.data.data.startup)
       
     }).catch(err =>{

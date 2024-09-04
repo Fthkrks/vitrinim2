@@ -1,34 +1,38 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import {  useEffect } from "react";
 import axios from "axios";
 import { APP_URL } from "../../config/index";
 import FormContent from "./_components/formcontent";
 import MobilePreview from "./_components/mobilepreview";
 function Admin() {
-  const { user } = useUser();
   const router = useRouter();
+  const { user } = useUser();
+
+  let email = user?.emailAddresses[0].emailAddress;
 
   useEffect(() => {
-    if (user) {
-      const checkUser = async () => {
-        axios
-          .get(`${APP_URL}/user`)
-          .then((result) => {
-            const data = result.data.data;
-            if (data === null) {
-              router.replace("/create");
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
+    user&&checkUser();
+  }, [user]);
 
-      checkUser();
-    }
-  }, [user, router]);
+
+  const checkUser = async () => {
+    axios
+      .get(`${APP_URL}/user`, {params: {email}})
+      .then((res) => {
+        const data = res.data.data.user;
+        if (data === null) {
+          router.replace("/create");
+        }
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  
 
   return (
     <div className=" py-12 px-6 overflow-auto">

@@ -5,14 +5,16 @@ import Response from "../../../config/response";
 import CustomError from "../../../config/error";
 import Enum from "../../../config/enum";
 
-export async function GET() {
+export async function GET(req) {
   try {
     await Database;
+    
+    const email = req.nextUrl.searchParams.get("email");
 
-    const users = await Users.findOne({}).select("email");
-    return NextResponse.json(Response.successResponse(users));
+
+    const user = await Users.findOne({ email });
+    return NextResponse.json(Response.successResponse({ success: true, user }));
   } catch (error) {
-    console.log("Error fetching feedbacks:", error);
     return NextResponse.json(Response.errorResponse(error));
   }
 }
@@ -49,6 +51,7 @@ export async function PUT(req){
     if(body.bio) updates.bio = body.bio;
     if(body.location) updates.location = body.location;
     if(body.revenue) updates.revenue = body.revenue;
+    if(body.theme) updates.theme = body.theme;
     if(body.avatar) updates.avatar = body.avatar + "?alt=media";
     const users =  await Users.updateOne({email: body.email}, updates)
 

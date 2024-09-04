@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-  userRef: { type: mongoose.Types.ObjectId, ref: "Users" },
+  userRef: { type: mongoose.Types.ObjectId, ref: "Users", unique: true},
   emailRef: String,
   url: String,
   name: { type: String, default: "" },
@@ -10,6 +10,7 @@ const schema = new mongoose.Schema({
   active: { type: Boolean, default: true },
   banner: { type: String, default: "" },
   category: { type: String, default: "" },
+  order: {type: Number, default: null}
 });
 
 const StartupModel =

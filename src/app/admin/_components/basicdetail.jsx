@@ -5,16 +5,20 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { APP_URL, FIREBASE_URL } from "../../../config";
 import { useUser } from "@clerk/nextjs";
 import toast from "react-hot-toast";
-import { UserDetailContext } from "../../_context/UserDetailContext";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../config/firebaseConfig";
-import { TwicImg, TwicPicture } from "@twicpics/components/react";
-
+import { TwicPicture } from "@twicpics/components/react";
+import { UserDetailContext } from "../../_context/UserStatesContext";
+import {PreviewUpdateContext} from "../../_context/PreviewUpdateContext";
 function BasicDetail() {
+
   const timeoutIdRef = useRef(null);
+  const {updatePreview, setUpdatePreview} = useContext(PreviewUpdateContext);
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const [profileImage, setProfileImage] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
+
+  
 
 
   const { user } = useUser();
@@ -22,8 +26,9 @@ function BasicDetail() {
 
   useEffect(() => {
     if (userDetail) {
-      setProfileImage(userDetail.avatar);
+      setProfileImage(userDetail[0]?.avatar);
     }
+    
 
     const handleClickOut = (e) => {
       const optionElement = document.getElementById("extra-container");
@@ -35,7 +40,7 @@ function BasicDetail() {
     return () => {
       window.removeEventListener("click", handleClickOut);
     };
-  }, [userDetail]);
+  }, [user ,userDetail]);
 
   const onInputChange = (e, name) => {
     clearTimeout(timeoutIdRef.current);
@@ -47,6 +52,7 @@ function BasicDetail() {
         .put(`${APP_URL}/user`, { email, [name]: value })
         .then((res) => {
           toast.success("Kaydedildi!", { position: "top-right" });
+          setUpdatePreview(updatePreview + 1);
         })
         .catch((error) => {
           toast.error("Hata!", { position: "top-right" });
@@ -69,12 +75,17 @@ function BasicDetail() {
         .then((res) => {
           toast.success("Kaydedildi!", { position: "top-right" });
           setProfileImage(avatar + "?alt=media");
+          setUpdatePreview(updatePreview + 1);
+
         })
         .catch((error) => {
           toast.error("Hata!", { position: "top-right" });
         });
     });
   };
+
+  
+  
 
 
   return (
@@ -105,14 +116,14 @@ function BasicDetail() {
         />
         <input
           type="text"
-          defaultValue={userDetail?.name}
+          defaultValue={userDetail[0]?.name}
           onChange={(e) => onInputChange(e, "name")}
           placeholder="Ad Soyad"
           className="input input-bordered w-full"
         />
       </div>
       <textarea
-        defaultValue={userDetail?.bio}
+        defaultValue={userDetail[0]?.bio}
         onChange={(e) => onInputChange(e, "bio")}
         className="textarea textarea-bordered"
         placeholder="Hakkında birşeyler yaz"
@@ -147,7 +158,7 @@ function BasicDetail() {
               <input
                 type="text"
                 key={1}
-                defaultValue={userDetail?.location}
+                defaultValue={userDetail[0]?.location}
                 className="grow"
                 placeholder="Lokasyon ?"
                 onChange={(e) => onInputChange(e, "location")}
@@ -163,7 +174,7 @@ function BasicDetail() {
               <input
                 type="number"
                 key={2}
-                defaultValue={userDetail?.revenue}
+                defaultValue={userDetail[0]?.revenue}
                 className="grow"
                 placeholder="Gelirin ?"
                 onChange={(e) => onInputChange(e, "revenue")}

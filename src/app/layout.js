@@ -5,9 +5,7 @@ import Database from "../lib/mongodb";
 import { Toaster } from "react-hot-toast";
 import { TwicInstall } from "@twicpics/components/react";
 import "@twicpics/components/style.css";
-
-
-
+import Provider from "./Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +24,7 @@ export default function RootLayout({ children }) {
               // domain is mandatory
               domain="https://vitrinim.twic.pics"
             />
-            {children}
+            <Provider>{children}</Provider>
           </div>
           <Toaster />
         </body>

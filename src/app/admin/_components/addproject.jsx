@@ -1,18 +1,20 @@
 import { Link2 } from "lucide-react";
 import React, { useContext, useState } from "react";
-import { UserDetailContext } from "../../_context/UserDetailContext";
+import { UserDetailContext } from "../../_context/UserStatesContext";
 import { APP_URL } from "../../../config";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { PreviewUpdateContext } from "../../_context/PreviewUpdateContext";
 
 
 function AddProject({refreshData}) {
 
     const userObject = useContext(UserDetailContext);
+    const {updatePreview, setUpdatePreview} = useContext(PreviewUpdateContext);
 
     const userDetail = userObject.userDetail
-    const email = userDetail.email
-    const id = userDetail._id
+    const email = userDetail[0]?.email
+    const id = userDetail[0]?._id
     
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +24,7 @@ function AddProject({refreshData}) {
     e.preventDefault();
     let url = e.target[0].value;
     axios.post(`${APP_URL}/startups`, {url, email, id }).then(res=>{
-        console.log(res);
+      setUpdatePreview(updatePreview +1)
         toast.success("Kaydedildi!", {position: "top-right"})
         refreshData();
         setIsOpen(false)
