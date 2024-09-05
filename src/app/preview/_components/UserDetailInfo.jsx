@@ -1,6 +1,15 @@
 import { TwicPicture } from "@twicpics/components/react";
 import { MapPin, Share } from "lucide-react";
+import Link from "next/link";
 import React from "react";
+import {
+  FaGithub,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTiktok,
+  FaXTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
 
 function UserDetailInfo({ userDetail }) {
   return (

@@ -1,11 +1,12 @@
 
 "use client"
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { APP_URL } from '../../config';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@clerk/nextjs'
+import { UserDetailContext } from '../_context/UserStatesContext';
 
 function CreateUsername() {
   const [username, setUsername] = useState("");
@@ -16,24 +17,24 @@ function CreateUsername() {
   let email = user?.emailAddresses[0].emailAddress
 
   useEffect(() => {
-    if (user) {
-      const checkUser = async () => {
-         axios.get(`${APP_URL}/user`).then(result =>{
-          const data = result.data.data.user                    
-          if(data !== null){            
-            router.replace("/admin")
-          }          
-          
-        }).catch(err =>{
-          console.log(err);
-          
-        });
-        
-      };
+    user&&checkUser();
+  }, [user]);
 
-      checkUser();
-    }
-  }, [user, router]);
+
+  const checkUser = async () => {
+    axios.get(`${APP_URL}/user`).then(result =>{
+     const data = result.data.data.user
+     if(data !== null){
+       router.replace("/admin")
+     }          
+     
+   }).catch(err =>{
+     console.log(err);
+     
+   });
+   
+ };
+
 
 
 
@@ -45,6 +46,7 @@ function CreateUsername() {
       return
     };
     axios.post(`${APP_URL}/user`, {username, fullname, email}).then(res =>{
+
       router.replace("/admin")
 
     }).catch(err =>{

@@ -1,6 +1,6 @@
 import { TwicPicture } from "@twicpics/components/react";
 import axios from "axios";
-import { Camera, Grip, Image, Link2, SquareStack, Trash } from "lucide-react";
+import { Camera, ChartArea, Grip, Image, Link2, SquareStack, Trash } from "lucide-react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { APP_URL } from "../../../config";
 import toast from "react-hot-toast";
@@ -12,7 +12,7 @@ import { PreviewUpdateContext } from "../../_context/PreviewUpdateContext";
 
 function ProjectEdit({ startupDetails, refreshData }) {
   const timeoutIdRef = useRef(null);
-  const {updatePreview, setUpdatePreview} = useContext(PreviewUpdateContext);
+  const { updatePreview, setUpdatePreview } = useContext(PreviewUpdateContext);
   const [selectedOption, setSelectedOption] = useState("");
   const [startupDetailData, setStartupDetailData] = useState([]);
 
@@ -39,13 +39,15 @@ function ProjectEdit({ startupDetails, refreshData }) {
 
   const onInputChange = (value, name, id) => {
     clearTimeout(timeoutIdRef.current);
-
     timeoutIdRef.current = setTimeout(() => {
       axios
         .put(`${APP_URL}/startups`, { [name]: value, id })
         .then((res) => {
+          
           toast.success("Kaydedildi!", { position: "top-right" });
-          setUpdatePreview(updatePreview +1)
+          
+          setUpdatePreview(updatePreview + 1);
+          refreshData();
         })
         .catch((error) => {
           toast.error("Hata!", { position: "top-right" });
@@ -75,7 +77,7 @@ function ProjectEdit({ startupDetails, refreshData }) {
             });
             refreshData();
             toast.success("Silme işlemi başarılı", { position: "top-right" });
-            setUpdatePreview(updatePreview +1)
+            setUpdatePreview(updatePreview + 1);
           })
           .catch((err) => {
             toast.error("Silme işlemi başarısız", { position: "top-right" });
@@ -97,8 +99,7 @@ function ProjectEdit({ startupDetails, refreshData }) {
         .then((res) => {
           toast.success("Kaydedildi!", { position: "top-right" });
           refreshData();
-          setUpdatePreview(updatePreview +1)
-
+          setUpdatePreview(updatePreview + 1);
         })
         .catch((error) => {
           toast.error("Hata!", { position: "top-right" });
@@ -126,8 +127,7 @@ function ProjectEdit({ startupDetails, refreshData }) {
     Promise.all(requests)
       .then((res) => {
         toast.success("Kaydedildi!", { position: "top-right" });
-        setUpdatePreview(updatePreview +1)
-
+        setUpdatePreview(updatePreview + 1);
       })
       .catch((error) => {
         toast.error("Hata!", { position: "top-right" });
@@ -221,13 +221,13 @@ function ProjectEdit({ startupDetails, refreshData }) {
                                   setSelectedOption("category" + index);
                                 }}
                               />
-                              <Image
+                              <ChartArea
                                 className={`w-11 h-11 p-3 rounded-md cursor-pointer hover:bg-gray-600 transition-all ${
-                                  selectedOption === "banner" + index &&
+                                  selectedOption === "chart" + index &&
                                   "bg-gray-600"
                                 }`}
                                 onClick={() => {
-                                  setSelectedOption("banner" + index);
+                                  setSelectedOption("chart" + index);
                                 }}
                               />
                               <Trash
@@ -279,6 +279,7 @@ function ProjectEdit({ startupDetails, refreshData }) {
                               >
                                 <SquareStack className="w-5 h-5" />
                                 <select
+                                  defaultValue={startup?.category || ""}
                                   className="select select-bordered w-full "
                                   onChange={(e) =>
                                     onInputChange(
@@ -288,64 +289,46 @@ function ProjectEdit({ startupDetails, refreshData }) {
                                     )
                                   }
                                 >
-                                  <option disabled selected>
-                                    Seç birini
-                                  </option>
-                                  <option value="Yakay zeka">
+                                  <option value="">Seç birini</option>
+                                  <option value=" Eğitim">🎓 Eğitim</option>
+                                  <option value="Yapay zeka">
                                     🤖 Yakay zeka
                                   </option>
-                                  <option value="Eğitim">🎓 Eğitim</option>
-                                  <option value="Sosyal Medya">
+                                  <option value=" Sosyal Medya">
                                     {" "}
                                     🌍 Sosyal Medya
                                   </option>
-                                  <option value="Tasarım">🎨 Tasarım</option>
-                                  <option value="E ticaret">
+                                  <option value=" Tasarım">🎨 Tasarım</option>
+                                  <option value=" E ticaret">
                                     🛒 E ticaret
                                   </option>
-                                  <option value="Analiz">📉 Analiz</option>
+                                  <option value=" Analiz">📉 Analiz</option>
                                   <option value="Pazarlama">
                                     📢 Pazarlama
                                   </option>
-                                  <option value="Fintek">💸 Fintek</option>
-                                  <option value="Ulaşım">🚗 Ulaşım</option>
+                                  <option value=" Fintek">💸 Fintek</option>
+                                  <option value=" Ulaşım">🚗 Ulaşım</option>
                                   <option value="Diğer">,🚀 Diğer</option>
                                 </select>
                               </label>
                             )}
-                            {selectedOption === "banner" + index && (
-                              <label>
-                                {startup?.banner ? (
-                                  <label
-                                    htmlFor={"startup-banner-input" + index}
-                                  >
-                                    <TwicPicture
-                                      src={startup?.banner}
-                                      className="w-12 h-12 rounded-full cursor-pointer"
-                                    />
-                                  </label>
-                                ) : (
-                                  <label
-                                    htmlFor={"startup-banner-input" + index}
-                                    className="cursor-pointer"
-                                  >
-                                    <Camera className="p-3 h-12 w-12 bg-gray-500 rounded-full" />
-                                  </label>
-                                )}
-                                <input
-                                  type="file"
-                                  onChange={(e) =>
-                                    handleFileUploadForStartup(
-                                      e,
-                                      "banner",
-                                      startup._id
-                                    )
-                                  }
-                                  accept="image/*"
-                                  id={"startup-banner-input" + index}
-                                  className="hidden"
-                                />
-                              </label>
+                            {selectedOption === "chart" + index && (
+                              <label
+                              className={` flex items-center justify-evenly gap-2 ${
+                                selectedOption !== "chart" + index && "hidden"
+                              }`}
+                            >
+                              <span>Tıklanma grafiği gösterilsin mi ?</span>
+                              <input
+                                type="checkbox"
+                                key={1}
+                                defaultChecked ={startup?.chart}
+                                className="checkbox"
+                                onChange={(e) =>
+                                  onInputChange( e.target.checked, "chart", startup._id)
+                                }
+                              />
+                            </label>
                             )}
                           </div>
                         </div>

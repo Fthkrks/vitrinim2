@@ -1,14 +1,17 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import {  useEffect } from "react";
+import {  useContext, useEffect } from "react";
 import axios from "axios";
 import { APP_URL } from "../../config/index";
 import FormContent from "./_components/formcontent";
 import MobilePreview from "./_components/mobilepreview";
+import { UserDetailContext } from "../_context/UserStatesContext";
 function Admin() {
   const router = useRouter();
   const { user } = useUser();
+  const { userDetail, setUserDetail } = useContext(UserDetailContext);
+
 
   let email = user?.emailAddresses[0].emailAddress;
 
@@ -25,6 +28,7 @@ function Admin() {
         if (data === null) {
           router.replace("/create");
         }
+        GetUserDetails()
 
       })
       .catch((err) => {
@@ -32,6 +36,12 @@ function Admin() {
       });
   };
 
+
+  const GetUserDetails = async () => {
+    axios.get(`${APP_URL}/userstartups`, { params: { email } }).then((res) => {
+      setUserDetail(res.data.data.userStartups);
+    });
+  };
   
 
   return (

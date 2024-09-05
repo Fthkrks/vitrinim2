@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   desc: { type: String, default: "" },
   logo: { type: String, default: "" },
   active: { type: Boolean, default: true },
-  banner: { type: String, default: "" },
+  chart: { type: Boolean, default: false },
   category: { type: String, default: "" },
   order: {type: Number, default: null}
 });

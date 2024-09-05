@@ -73,7 +73,7 @@ export async function PUT(req) {
     if (body.desc) updates.desc = body.desc;
     if (body.category) updates.category = body.category;
     if (body.logo) updates.logo = body.logo + "?alt=media";
-    if (body.banner) updates.banner = body.banner + "?alt=media";
+    if (typeof body.chart === "boolean") updates.chart = body.chart;
     if (typeof body.active === "boolean") updates.active = body.active;
     if (body.order !== undefined) updates.order = body.order;
 

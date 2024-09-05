@@ -5,6 +5,7 @@ import ProjectEdit from "./projectedit"
 import axios from 'axios';
 import { APP_URL } from '../../../config';
 import { useUser } from '@clerk/nextjs';
+import SocialMedia from "./SocialMedia";
 
 
 function FormContent() {
@@ -15,7 +16,7 @@ function FormContent() {
   
 
   useEffect(() =>{
-    user&&GetProjectList()
+    user&&GetProjectList();
   },[user]);
 
   const GetProjectList = async()=>{
@@ -29,6 +30,9 @@ function FormContent() {
     })
   }
 
+  
+
+
   return (
     <div>
       <h2 className='text-3xl font-bold'>Vitrine Bir şeyler Ekle</h2>
@@ -37,6 +41,8 @@ function FormContent() {
       <hr className='my-5  opacity-40'></hr>
       <AddProject refreshData={GetProjectList}/>
       <ProjectEdit startupDetails ={startupDetails} setStartupDetails={setStartupDetails} refreshData={GetProjectList} />
+      <hr className='my-5  opacity-40'></hr>
+      <SocialMedia />
     </div>
   )
 }

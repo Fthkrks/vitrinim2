@@ -20,15 +20,16 @@ function ProjectList({ startupList }) {
   const userId = userDetail[0]?._id;
 
   useEffect(() => {
-    user && StartupAnalyticData();
-  }, [user, userId]);
-
-  useEffect(() => {
+    // startupList sıralanıyor
     if (startupList?.length > 0) {
       const sortedList = [...startupList].sort((a, b) => a.order - b.order);
       setSortedStartupList(sortedList);
     }
   }, [startupList]);
+
+  useEffect(() => {
+    user && StartupAnalyticData();
+  }, [user, userId]);
 
   const onStartupsClick = async (startup) => {
     let id = startup._id;
@@ -36,12 +37,12 @@ function ProjectList({ startupList }) {
     let month = moment().format("MMM");
 
     axios
-      .post(`${APP_URL}/startupsclick`, { id, userId, name , month })
+      .post(`${APP_URL}/startupsclick`, { id, userId, name, month })
       .then((res) => {
-        if(res.data.data.startupClicks){
-          setStartupClickData([res.data.data.startupClicks])
+        if (res.data.data.startupClicks) {
+          setStartupClickData([res.data.data.startupClicks]);
         }
-        StartupAnalyticData();        
+        StartupAnalyticData();
 
         window.open(startup.url, "_blank");
       })
@@ -58,62 +59,56 @@ function ProjectList({ startupList }) {
       });
   };
 
-  
-  
-   
-
   const StartupWiseAnalyticData = (startupId) => {
-    
     if (!Array.isArray(startupClicklData)) {
-        return;
-        
+      return;
     }
 
-    let resp = startupClicklData.filter((startup) => startup?.startupRef == startupId);    
-    
+    let resp = startupClicklData.filter(
+      (startup) => startup?.startupRef == startupId
+    );
+
     let result = [];
 
+    const finalResult = [...result, ...resp];
 
-    const finalResult = [...result,...resp]
-    
     result.push(resp[0]);
-    
+
     return finalResult;
-};
+  };
 
-
-
-return (
-  <div className=" grid grid-cols-1 md:grid-cols-2 gap-7 mt-10 my-8 ">
-    {sortedStartupList?.map((startup, index) => (
-      <div
-        onClick={() => onStartupsClick(startup)}
-        className="border border-base-300 shadow-sm rounded-lg p-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer"
-        key={index}
-      >
-        <div className="flex gap-2 items-center">
-          <TwicPicture
-            src={startup?.logo}
-            className="w-[40px] h-[40px] rounded-full"
-          />
-          <h2 className="font-bold flex w-full justify-between items-center">
-            {startup?.name}
-          </h2>
-          <div className={`${!startup.category && "hidden"}`}>
-          <span className={`hidden lg:flex items-center text-md font-normal text-base-100  badge badge-primary p-2 rounded-full `}>
-            {startup?.category}
-          </span>
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-7 mt-10 my-8">
+      {sortedStartupList?.map((startup, index) => (
+        <div
+          onClick={() => onStartupsClick(startup)}
+          className="border border-base-300 shadow-sm rounded-lg p-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer"
+          key={index}
+        >
+          <div className="flex gap-2 items-center">
+            <TwicPicture
+              src={startup?.logo}
+              className="w-[40px] h-[40px] rounded-full"
+            />
+            <h2 className="font-bold flex w-full justify-between items-center">
+              {startup?.name}
+            </h2>
+            <div className={`${!startup.category && "hidden"}`}>
+              <span className="hidden lg:flex items-center text-md font-normal text-base-100 badge badge-primary p-2 rounded-full">
+                {startup?.category}
+              </span>
+            </div>
           </div>
-
+          <h2 className="text-base-content/80 text-xs lg:text-sm my-2">
+            {startup?.desc}
+          </h2>
+          {startup?.chart && (
+            <AnalytiCharts data={StartupWiseAnalyticData(startup._id)} />
+          )}
         </div>
-        <h2 className="text-base-content/80 text-xs lg:text-sm my-2">
-          {startup?.desc}
-        </h2>
-        {startup.chart && <AnalytiCharts data ={StartupWiseAnalyticData(startup._id)} /> }
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
 }
 
 export default ProjectList;

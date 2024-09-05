@@ -10,17 +10,15 @@ export async function GET(req) {
   try {
     await Database;
     const email = req.nextUrl.searchParams.get("email");
+    const username = req.nextUrl.searchParams.get("currentUsername");
 
-    if (!email) {
-      throw new CustomError(
-        Enum.HTTP_CODES.BAD_REQUEST,
-        "Email is required this error userstartups get"
-      );
-    }
+
 
     const userStartups = await Users.aggregate([
       {
-        $match: { email: email }, 
+        $match: {
+          $or: [{ email: email }, { username: username }], // email veya username ile eşleşme
+        },
       },
       {
         $lookup: {

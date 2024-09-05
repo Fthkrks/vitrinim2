@@ -45,7 +45,7 @@ function BasicDetail() {
   const onInputChange = (e, name) => {
     clearTimeout(timeoutIdRef.current);
 
-    const value = e.target.value;
+    let value = e.target.value || null;
 
     timeoutIdRef.current = setTimeout(() => {
       axios
@@ -53,6 +53,8 @@ function BasicDetail() {
         .then((res) => {
           toast.success("Kaydedildi!", { position: "top-right" });
           setUpdatePreview(updatePreview + 1);
+          setUserDetail([{...userDetail[0], [name]: value}, ...userDetail.slice(1)])
+
         })
         .catch((error) => {
           toast.error("Hata!", { position: "top-right" });
