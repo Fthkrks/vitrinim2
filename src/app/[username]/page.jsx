@@ -38,8 +38,8 @@ function UserPage() {
     axios
       .get(`${APP_URL}/userstartups`, { params: { currentUsername } })
       .then((res) => {
-        let data = res.data.data.userStartups;
-        if (data.length == 0) {
+        let data = res.data.data?.userStartups;
+        if (data?.length == 0) {
           router.replace("/404");
         }
         if (!data[0]?.payment) {

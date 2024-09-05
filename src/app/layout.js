@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Database from "../lib/mongodb";
 import { Toaster } from "react-hot-toast";
 import { TwicInstall } from "@twicpics/components/react";
 import "@twicpics/components/style.css";

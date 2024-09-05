@@ -6,6 +6,10 @@ if (!MONGODB_URI) {
 }
 
 const uri = MONGODB_URI;
+
+console.log(uri);
+
+
 const options = {
   serverSelectionTimeoutMS: 10000, // 10 saniyelik zaman aşımı
 };
