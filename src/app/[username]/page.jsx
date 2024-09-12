@@ -77,7 +77,7 @@ function UserPage() {
           <p className="py-8">
             Startuplarını tek panelde toplayıp çeşitli platformlara paylaşarak bilinirliğini artırabilirsin!
           </p>
-          <Link href="/upgrade" className="btn btn-primary border-none text-center text-white w-full">
+          <Link href="/upgrade" className="btn btn-primary border-none text-center z-40 text-white w-full">
           Vitrinimi yayınla
           </Link>
         </div>

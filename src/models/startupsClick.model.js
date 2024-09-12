@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 
 const schema = new mongoose.Schema({
-    userRef: {type: mongoose.Types.ObjectId, ref:"Users", unique: true},
+    userRef: {type: mongoose.Types.ObjectId, ref:"Users"},
     startupRef: {type: mongoose.Types.ObjectId, ref: "Startups"},
     name: String,
     month: {type: String},

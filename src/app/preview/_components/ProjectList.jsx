@@ -82,9 +82,10 @@ function ProjectList({ startupList }) {
       {sortedStartupList?.map((startup, index) => (
         <div
           onClick={() => onStartupsClick(startup)}
-          className="border border-base-300 shadow-sm rounded-lg p-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer"
+          className="border border-base-300 shadow-sm relative rounded-lg p-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer"
           key={index}
         >
+          <div className={`w-3 h-3 tooltip flex justify-end absolute top-3 right-5  rounded-full ${startup?.active ? "bg-green-500" : "bg-red-500"}`} data-tip={startup?.active ? "Yayında" : "Yayında Değil" }></div>
           <div className="flex gap-2 items-center">
             <TwicPicture
               src={startup?.logo}

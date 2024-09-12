@@ -38,6 +38,8 @@ function ProjectEdit({ startupDetails, refreshData }) {
   }, [startupDetails]);
 
   const onInputChange = (value, name, id) => {
+    console.log(value);
+    
     clearTimeout(timeoutIdRef.current);
     timeoutIdRef.current = setTimeout(() => {
       axios
@@ -265,7 +267,7 @@ function ProjectEdit({ startupDetails, refreshData }) {
                                   className="grow"
                                   placeholder="Url ?"
                                   onChange={(e) =>
-                                    onInputChange(e, "url", startup._id)
+                                    onInputChange(e.target.value, "url", startup._id)
                                   }
                                 />
                               </label>

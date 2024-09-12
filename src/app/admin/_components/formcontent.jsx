@@ -38,7 +38,7 @@ function FormContent() {
       <h2 className='text-3xl font-bold'>Vitrine Bir şeyler Ekle</h2>
       <span className='textarea-md'>Kurduğun başarılı startuplarını ekleyerek vitrinde sergileyebilirsin</span>
       <BasicDetail/>
-      <hr className='my-5  opacity-40'></hr>
+      <hr className='my-5   opacity-40'></hr>
       <AddProject refreshData={GetProjectList}/>
       <ProjectEdit startupDetails ={startupDetails} setStartupDetails={setStartupDetails} refreshData={GetProjectList} />
       <hr className='my-5  opacity-40'></hr>

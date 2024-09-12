@@ -3,8 +3,10 @@ import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
     avatar: {type: String, default:""},
     name: { type: String },
+    packetType:{type: String},
+    expirationDate: {type: Date, default: null},
     email: { type: String},
-    username: {type: String, default:""},
+    username: {type: String, default:"", unique: true},
     bio: String,
     location: String,
     revenue: {type: Number, default: null},

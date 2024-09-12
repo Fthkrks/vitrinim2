@@ -36,7 +36,7 @@ function SideNav() {
   ];
 
   return (
-    <div className="p-4 bg-[#00000052] h-screen">
+    <div className="p-4 bg-[#00000052] h-screen  md:block hidden">
       {menList.map((menu, index) => {
         const isActive = pathname === menu.path;
         

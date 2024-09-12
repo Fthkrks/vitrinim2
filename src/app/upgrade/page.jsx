@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Pricing from "../_components/Pricing";
 function Upgrade() {
   return (
-    <div>Upgrade</div>
+    <div>
+      <Pricing/>
+    </div>
   )
 }
 

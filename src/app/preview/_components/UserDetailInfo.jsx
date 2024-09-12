@@ -10,8 +10,24 @@ import {
   FaXTwitter,
   FaYoutube,
 } from "react-icons/fa6";
+import { BASE_URL } from "../../../config";
+import toast from "react-hot-toast";
+
 
 function UserDetailInfo({ userDetail }) {
+
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(`${BASE_URL}/${userDetail[0].username}`)
+      .then(() => {
+        toast.success('Link kopyalandı!');
+      })
+      .catch(err => {
+        toast.error('Link kopyalanırken hata oluştu:', err);
+      });
+  };
+
+
+
   return (
     <div className="flex flex-col justify-center md:h-screen">
       <div className="w-full flex items-center justify-between">
@@ -38,7 +54,7 @@ function UserDetailInfo({ userDetail }) {
               <MapPin /> {userDetail[0]?.location}
             </h2>
             <div>
-              <button className="md:hidden btn btn-secondary btn-sm">
+              <button onClick={handleCopyClick} className="md:hidden btn btn-secondary btn-sm" >
                 <Share className="w-3 h-3" /> Paylaş
               </button>
               <div className="mt-10 flex items-center justify-between text-xl">

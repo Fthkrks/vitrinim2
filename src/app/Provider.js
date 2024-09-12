@@ -14,15 +14,15 @@ function Provider({ children }) {
   let email = user?.emailAddresses[0]?.emailAddress;
 
 
-  // useEffect(() =>{
-  //   user&&GetUserDetails()
-  // },[user])
+  useEffect(() =>{
+    user&&GetUserDetails()
+  },[user])
 
-  // const GetUserDetails = async () => {
-  //   axios.get(`${APP_URL}/userstartups`, { params: { email } }).then((res) => {
-  //     setUserDetail(res.data.data.userStartups);
-  //   });
-  // };
+  const GetUserDetails = async () => {
+    axios.get(`${APP_URL}/userstartups`, { params: { email } }).then((res) => {
+      setUserDetail(res.data.data.userStartups);
+    });
+  };
 
 
 
