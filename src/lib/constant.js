@@ -1,7 +1,7 @@
 export const APP_DATA = {
     name: "Vitrinim",
     version: "0.0.1",
-    description: "Vitrinim is a portfolio maker",
+    description: "Tek bir sayfada, sonsuz yetenekler!",
     author: "Fatih Karakuş",
     website: "https://www.linkedin.com/in/-fatihkarakus-/",
     keywords: [
@@ -14,6 +14,14 @@ export const APP_DATA = {
         "saas",
         "entrepreneur",
         "founder",
+        "girişimcilik",
+        "yazılım",
+        "github",
+        "kurucu",
+        "proje",
+        "portföy",
+        "geliştirici",
+        
         
 
     ]

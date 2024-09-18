@@ -1,6 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+
+export const config = {
+  matcher: "/"
+}
+
 // /admin, /preview, /create rotalarını koruyalım, / kök dizinini hariç tutalım
 const isProtectedRoute = createRouteMatcher(["", "/preview", "/create", "/payment"]);
 const isRootPath = createRouteMatcher(["/"]);
