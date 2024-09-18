@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: APP_DATA.name,
   description: APP_DATA.description,
-  icons :{
+  icons:{
     icon: "/favicon.ico",
   },
   keywords: APP_DATA.keywords,
