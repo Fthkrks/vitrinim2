@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
     name: { type: String },
     packetType:{type: String},
     expirationDate: {type: Date, default: null},
-    email: { type: String},
+    email: { type: String, unique: true},
     username: {type: String, default:"", unique: true},
     bio: String,
     location: String,

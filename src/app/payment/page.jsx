@@ -6,6 +6,7 @@ import { PAYMENT_URL } from "../../config";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { UserDetailContext } from "../_context/UserStatesContext";
+import { useUser } from "@clerk/nextjs";
 
 function Payment() {
   const [cardNumber, setCardNumber] = useState("");
@@ -18,9 +19,17 @@ function Payment() {
   const [expirationDates, setExpirationDates] = useState("")
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const router = useRouter();
+  const { user } = useUser();
 
-  const id = userDetail[0]?._id;
 
+  const userId = userDetail[0]?._id;
+  let email = user?.emailAddresses[0]?.emailAddress;
+  let firstname = user?.firstName;
+  let lastname = user?.lastName;
+  
+  
+
+  
   
 
   useEffect(() => {
@@ -73,11 +82,11 @@ function Payment() {
     };
 
     const buyer = {
-      id: "BY789",
-      name: "john",
-      surname: "Doe",
+      id: userId,
+      name: firstname,
+      surname: lastname || "Doe",
       gsmNumber: "+90535000000",
-      email: "email@email.com",
+      email: email,
       identityNumber: "7430086644791",
       lastLoginDate: "2020-10-05 12:43:35",
       registrationDate: "2020-10-04 12:43:35",
@@ -108,9 +117,9 @@ function Payment() {
       {
         id: "BI101",
         price: paymentType, // Ürün fiyatı ondalıklı formatta olmalı
-        name: "Product 1",
-        category1: "Category 1", // İyzico için category1 zorunlu
-        itemType: "PHYSICAL",
+        name: packetType,
+        category1: "Bıo App", // İyzico için category1 zorunlu
+        itemType: "VIRTUAL",
       },
     ];
 
@@ -123,31 +132,52 @@ function Payment() {
       shippingAddress: shippingAddress,
       billingAddress: billingAddress,
       basketItems: basketItems,
+      id: userId,
+      packetType: packetType,
+      expirationDate: expirationDates
+
+
     };
 
     try {
-      const response = await axios
-        .post(`${PAYMENT_URL}/payment/threeds`, paymentData,  {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(async (res) => {
-          console.log(res);
-          let paymentId = res.data.paymentId
-          let conversationData = ""
-          const html =Buffer.from(res.data.threeDSHtmlContent, "base64").toString();
-          
-          const newWindow = window.open();
-          newWindow.document.write(html);
-          newWindow.document.close();
+       await axios.post(`${PAYMENT_URL}/payment/threeds`, paymentData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(res =>{
+        const paymentPageUrl = res.data.paymentPageUrl;
+        const conversationId = res.data.conversationId;
+        window.open(paymentPageUrl);
+        //   try {
+        //     console.log(conversationId);
+            
+        //     const res = await axios.post(`${PAYMENT_URL}/payment/check`, { conversationId });
+            
+        //     // Ödeme kontrolü başarılı ise interval'i durdur
+        //     if (res.data.status === 'success') {
+        //       console.log("payment success",res);
+              
+              
+        //       clearInterval(checkResponse);
+        //     }
+        //   } catch (error) {
+        //     console.error('Ödeme kontrol hatası:', error);
+        //   }
+        // }, 5000); 
 
+      });
+    
 
-          
-        });
+    
+      // Ödeme sayfasını açıyoruz
+
+    
+      // Interval kontrol işlemi için bir ID oluşturuyoruz
+ // 5 saniyede bir kontrol yapılıyor
     } catch (error) {
-      console.log(error);
+      console.error('Ödeme işlemi hatası:', error);
     }
+    
   };
 
   return (

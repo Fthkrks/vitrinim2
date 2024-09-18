@@ -87,15 +87,18 @@ function ProjectList({ startupList }) {
         >
           <div className={`w-3 h-3 tooltip flex justify-end absolute top-3 right-5  rounded-full ${startup?.active ? "bg-green-500" : "bg-red-500"}`} data-tip={startup?.active ? "Yayında" : "Yayında Değil" }></div>
           <div className="flex gap-2 items-center">
+            <div>
             <TwicPicture
               src={startup?.logo}
-              className="w-[40px] h-[40px] rounded-full"
+              className="w-[30px] h-[30px] rounded-full"
             />
+            </div>
+
             <h2 className="font-bold flex w-full justify-between items-center">
               {startup?.name}
             </h2>
-            <div className={`${!startup.category && "hidden"}`}>
-              <span className="hidden lg:flex items-center text-md font-normal text-base-100 badge badge-primary p-2 rounded-full">
+            <div className={`${!startup.category && "hidden"} w-1/2`}>
+              <span className="hidden lg:flex items-center text-md font-normal text-base-100 badge badge-primary w-full rounded-full">
                 {startup?.category}
               </span>
             </div>

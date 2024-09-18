@@ -1,5 +1,5 @@
 import { TwicPicture } from "@twicpics/components/react";
-import { MapPin, Share } from "lucide-react";
+import { Banknote, MapPin, Share } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import {
@@ -46,6 +46,7 @@ function UserDetailInfo({ userDetail }) {
             >
               {userDetail[0]?.name}
             </h2>
+            <div className="flex md:gap-x-10 gap-x-5">
             <h2
               className={`flex gap-2 items-center text-gray-500 ${
                 !userDetail[0].location && "hidden"
@@ -53,6 +54,15 @@ function UserDetailInfo({ userDetail }) {
             >
               <MapPin /> {userDetail[0]?.location}
             </h2>
+            <h2
+              className={`flex gap-2 items-center text-gray-500 ${
+                !userDetail[0].revenue && "hidden"
+              }`}
+            >
+              <Banknote /> {userDetail[0]?.revenue}
+            </h2>
+            </div>
+
             <div>
               <button onClick={handleCopyClick} className="md:hidden btn btn-secondary btn-sm" >
                 <Share className="w-3 h-3" /> Paylaş

@@ -22,40 +22,57 @@ function CreateUsername() {
 
 
   const checkUser = async () => {
-    axios.get(`${APP_URL}/user`).then(result =>{
-     const data = result.data.data.user
-     if(data !== null){
-       router.replace("/admin")
-     }          
-     
-   }).catch(err =>{
-     console.log(err);
-     
-   });
+    try {
+      axios.get(`${APP_URL}/user`).then(result =>{
+        const data = result.data.data.user
+        
+        if(data !== null){
+          router.replace("/admin")
+        } 
+         
+      }).catch(err =>{
+        console.log(err);
+
+        
+      });
+    } catch (error) {
+      console.log("this error create checkuser function", error);
+      
+      
+    }
+
    
  };
 
 
+ const onCreateBtnClick = () => {
+
+  // Kullanıcı adında boşluk var mı kontrolü
+  const formattedUsername = username.replace(/\s+/g, ''); // Boşlukları kaldır
+
+  if (formattedUsername.length > 10) {
+    toast.error("Adınız 10 karakterden fazla olmamalı", { position: "top-right" });
+    return;
+  };
+
+  axios.post(`${APP_URL}/user`, { username: formattedUsername, fullname, email }).then(res => {
+
+    let data = res.data;
+
+    if (data.code === 409) {
+      toast.error("Bu kullanıcı adı kullanılmış, başka bir ad deneyiniz!");
+      return;
+    }
+
+    router.replace("/admin");
+
+  }).catch(err => {
+    console.log(err);
+  });
+}
 
 
 
-  const onCreateBtnClick = () =>{
-    
-    if(username.length >10){
-      toast.error("Adınız 10 karakterden fazla olmamalı", {position: "top-right"})
-      return
-    };
-    axios.post(`${APP_URL}/user`, {username, fullname, email}).then(res =>{
-
-      router.replace("/admin")
-
-    }).catch(err =>{
-      console.log(err);
-      
-    })
-
-
-  }
   return (
     <div className='flex justify-center items-center h-screen'>
       <div className='p-10 border rounded-lg flex flex-col'>

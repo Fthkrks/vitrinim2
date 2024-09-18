@@ -83,33 +83,37 @@ function ProjectList({ startupList }) {
 
 
 return (
-  <div className=" grid grid-cols-1 md:grid-cols-2 gap-7 mt-10 my-8 ">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-7 mt-10 my-8">
     {sortedStartupList?.map((startup, index) => (
       <div
         onClick={() => onStartupsClick(startup)}
-        className="border border-base-300 shadow-sm rounded-lg relative p-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer"
+        className="border border-base-300 shadow-sm relative rounded-lg p-5 hover:scale-105 transition-all hover:shadow-md cursor-pointer"
         key={index}
       >
         <div className={`w-3 h-3 tooltip flex justify-end absolute top-3 right-5  rounded-full ${startup?.active ? "bg-green-500" : "bg-red-500"}`} data-tip={startup?.active ? "Yayında" : "Yayında Değil" }></div>
         <div className="flex gap-2 items-center">
+          <div>
           <TwicPicture
             src={startup?.logo}
-            className="w-[40px] h-[40px] rounded-full"
+            className="w-[30px] h-[30px] rounded-full"
           />
+          </div>
+
           <h2 className="font-bold flex w-full justify-between items-center">
             {startup?.name}
           </h2>
-          <div className={`${!startup.category && "hidden"}`}>
-          <span className={`hidden lg:flex items-center text-md font-normal text-base-100  badge badge-primary p-2 rounded-full `}>
-            {startup?.category}
-          </span>
+          <div className={`${!startup.category && "hidden"} w-1/2`}>
+            <span className="hidden lg:flex items-center text-md font-normal text-base-100 badge badge-primary w-full rounded-full">
+              {startup?.category}
+            </span>
           </div>
-
         </div>
         <h2 className="text-base-content/80 text-xs lg:text-sm my-2">
           {startup?.desc}
         </h2>
-        {startup.chart && <AnalytiCharts data ={StartupWiseAnalyticData(startup._id)} /> }
+        {startup?.chart && (
+          <AnalytiCharts data={StartupWiseAnalyticData(startup._id)} />
+        )}
       </div>
     ))}
   </div>

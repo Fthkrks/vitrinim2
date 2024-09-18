@@ -12,7 +12,7 @@ function Navbar() {
         </div>
       </div>
       <div className="navbar-center hidden lg:flex gap-x-20">
-        <Link href="/?target=pricing" className="hover:underline">Fiyatlandırma</Link>
+        <Link href="/#pricing" className="hover:underline">Fiyatlandırma</Link>
         <Link href="/sign-up" className="hover:underline"> Kayıt ol</Link>
       </div>
       <div className="navbar-end">
