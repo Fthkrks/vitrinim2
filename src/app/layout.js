@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: APP_DATA.name,
   description: APP_DATA.description,
-  icons:{
+  icons: {
     icon: "/favicon.ico",
   },
   keywords: APP_DATA.keywords,
@@ -36,7 +36,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="tr">
         <body className={inter.className}>
           <div data-theme="dark" className=" h-screen">
             <TwicInstall
@@ -50,4 +50,4 @@ export default function RootLayout({ children }) {
       </html>
     </ClerkProvider>
   );
-}
+};
