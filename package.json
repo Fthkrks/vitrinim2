@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@clerk/elements": "^0.14.0",
-    "@clerk/nextjs": "^5.3.3",
+    "@clerk/nextjs": "^5.5.5",
     "@twicpics/components": "^0.30.0",
     "axios": "^1.7.5",
     "chalk": "^4.1.2",
