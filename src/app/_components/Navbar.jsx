@@ -7,7 +7,7 @@ function Navbar() {
     <div className="navbar my-5 ">
       <div className="navbar-start">
         <div className="flex items-center gap-2 cursor-pointer">
-          <Image src="/vitrinim2.png" width={50} height={50} />
+          <Image src="/vitrinim3.png" width={50} height={50} />
           Vitrinim
         </div>
       </div>
