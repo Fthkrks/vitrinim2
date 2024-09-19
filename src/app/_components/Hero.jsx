@@ -2,7 +2,6 @@ import React from "react";
 import { BASE_URL } from "../../config";
 import Link from "next/link";
 
-console.log(BASE_URL);
 
 
 function Hero() {
@@ -14,7 +13,7 @@ function Hero() {
         <div className="display h-full">
           <iframe
             title="profile"
-            src={`${BASE_URL}/fatihK`}
+            src={`${process.env.NEXT_PUBLIC_PRODUCT_URL}/fatihK`}
             width={"100%"}
             height={"100%"}
             className="rounded-3xl"
