@@ -2,6 +2,9 @@ import React from "react";
 import { BASE_URL } from "../../config";
 import Link from "next/link";
 
+console.log(BASE_URL);
+
+
 function Hero() {
   return (
     <div className="hero md:h-screen md:my-0 my-10">
