@@ -16,22 +16,23 @@ export const metadata = {
     icon: "/favicon.ico",
   },
   keywords: APP_DATA.keywords,
-  openGraph:{
+  metadataBase: new URL("https://vitrinim.co"),  // Temel URL'yi buraya ekleyin
+  openGraph: {
     type: "website",
     url: APP_DATA.website,
     title: APP_DATA.name,
     description: APP_DATA.description,
-    images:[
+    images: [
       {
         url: "/vitrinim3.png",
         width: 800,
         height: 600,
-        alt: APP_DATA.name
-      }
-    ]
-  }
-
+        alt: APP_DATA.name,
+      },
+    ],
+  },
 };
+
 
 export default function RootLayout({ children }) {
   return (
