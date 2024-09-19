@@ -13,7 +13,7 @@ function Hero() {
         <div className="display h-full">
           <iframe
             title="profile"
-            src={`${process.env.NEXT_PUBLIC_PRODUCT_URL}/fatihK`}
+            src={`${BASE_URL}/fatihK`}
             width={"100%"}
             height={"100%"}
             className="rounded-3xl"
