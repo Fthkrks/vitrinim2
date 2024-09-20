@@ -27,12 +27,6 @@ function MobileSideNav() {
       icon: BarChart,
       path: "/admin/analytics",
     },
-    {
-      id: 4,
-      name: "Settings",
-      icon: Settings,
-      path: "/admin/settings",
-    },
   ];
 
   return (
