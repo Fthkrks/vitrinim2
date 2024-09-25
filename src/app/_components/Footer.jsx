@@ -15,6 +15,7 @@ function Footer() {
           <Link href="/deliveryandreturn" className="link link-hover">Teslimat ve İade Şartları</Link>
           <Link href="/privacy" className="link link-hover">Gizlilik Sözleşmesi</Link>
           <Link href="/distancesellingagreement" className="link link-hover">Mesafeli Satış Sözleşmesi</Link>
+          <Link href="/termsandconditions" className="link link-hover">Şartlar & Koşullar</Link>
           {/* <a className="link link-hover">SSL Sertifikası</a> */}
         </nav>
       </footer>
