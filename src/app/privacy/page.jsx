@@ -2,112 +2,127 @@ import React from "react";
 
 function Privacy() {
   return (
-    <div className="flex items-center justify-center p-20">
-      <div>
-        <h1 className="text-3xl font-bold">Gizlilik Politikası</h1>
+    <div className="">
+      <div className="max-w-4xl mx-auto p-6  rounded-lg shadow-md mt-10">
+        <h1 className="text-3xl font-bold text-center mb-6">Gizlilik Sözleşmesi</h1>
 
-        <p>
-          Fatih Karakuş olarak (veya "Biz"), kullanıcılarımızın gizliliğine
-          saygı duyuyoruz ve gizliliklerini korumak için çalışıyoruz. Bu
-          Gizlilik Politikası, web sitemizi ziyaret ettiğinizde ve
-          hizmetlerimizi kullandığınızda hangi bilgileri topladığımızı, bu
-          bilgileri nasıl kullandığımızı ve koruduğumuzu açıklamaktadır.
-        </p>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">1. GİRİŞ</h2>
+          <p>
+            Bu Gizlilik Sözleşmesi, SaaS platformumuzun kullanıcılarından
+            topladığı kişisel verilerin nasıl kullanıldığını ve korunduğunu
+            açıklamaktadır. Platformumuzu kullanarak, bu sözleşmede belirtilen
+            şartları kabul etmiş sayılırsınız.
+          </p>
+        </section>
 
-        <h2>1. Toplanan Bilgiler</h2>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">2. TOPLANAN BİLGİLER</h2>
+          <p>
+            Hizmetlerimizi sunabilmek için çeşitli bilgiler toplarız. Bu
+            bilgiler aşağıdaki gibidir:
+          </p>
+          <ul className="list-disc list-inside mt-4">
+            <li>
+              <strong>Kişisel Bilgiler:</strong> Ad, soyad, e-posta adresi,
+              telefon numarası gibi bilgiler kaydedilir.
+            </li>
+            <li>
+              <strong>Hizmet Kullanım Verileri:</strong> Hizmetlerimizi nasıl
+              kullandığınızla ilgili bilgiler, cihaz bilgileri ve IP adresiniz
+              gibi teknik veriler toplanabilir.
+            </li>
+            <li>
+              <strong>Çerezler:</strong> Web sitemizdeki deneyiminizi
+              geliştirmek amacıyla çerezler kullanılmaktadır. Çerezler,
+              tarayıcınıza küçük dosyalar olarak kaydedilir.
+            </li>
+          </ul>
+        </section>
 
-        <p>
-          Sitemizi ziyaret ettiğinizde ve hizmetlerimizi kullandığınızda,
-          aşağıdaki kişisel bilgileri toplayabiliriz:
-        </p>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">3. BİLGİLERİN KULLANIMI</h2>
+          <p>
+            Topladığımız kişisel veriler, aşağıdaki amaçlar doğrultusunda
+            kullanılabilir:
+          </p>
+          <ul className="list-disc list-inside mt-4">
+            <li>Hizmetleri sunmak, geliştirmek ve kişiselleştirmek.</li>
+            <li>Müşteri desteği sağlamak ve sorunları çözmek.</li>
+            <li>Güvenlik amaçlı olarak hesaplarınızı korumak.</li>
+            <li>Kullanıcı deneyimini iyileştirmek ve yeni hizmetler sunmak.</li>
+          </ul>
+        </section>
 
-        <ul>
-          <li>Ad, soyad, e-posta adresi gibi kişisel bilgiler.</li>
-          <li>
-            IP adresiniz, tarayıcı türünüz ve ziyaret ettiğiniz sayfalar gibi
-            otomatik olarak toplanan bilgiler.
-          </li>
-          <li>
-            Çerezler ve benzeri izleme teknolojileri ile toplanan bilgiler.
-          </li>
-        </ul>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">
+            4. BİLGİ PAYLAŞIMI VE ÜÇÜNCÜ TARAFLAR
+          </h2>
+          <p>
+            Kişisel bilgilerinizi üçüncü taraflarla yalnızca aşağıdaki
+            durumlarda paylaşırız:
+          </p>
+          <ul className="list-disc list-inside mt-4">
+            <li>
+              <strong>Hizmet Sağlayıcılar:</strong> Hizmetlerimizi sunmak için
+              üçüncü taraf hizmet sağlayıcılarla işbirliği yapabiliriz (örneğin,
+              ödeme işleme veya veri depolama hizmetleri).
+            </li>
+            <li>
+              <strong>Yasal Yükümlülükler:</strong> Hukuki gereklilikler
+              doğrultusunda veya yasal bir zorunluluk doğduğunda kişisel
+              bilgilerinizi paylaşabiliriz.
+            </li>
+            <li>
+              <strong>İş Transferi:</strong> Platformun satışı veya birleşmesi
+              durumunda kişisel bilgiler yeni sahiplerle paylaşılabilir.
+            </li>
+          </ul>
+        </section>
 
-        <h2>2. Bilgilerin Kullanımı</h2>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">5. BİLGİLERİN KORUNMASI</h2>
+          <p>
+            Kişisel verilerinizin güvenliği bizim için önemlidir. Bu nedenle,
+            bilgilerinizin güvenliğini sağlamak için çeşitli teknik ve idari
+            önlemler alırız. Ancak, internet üzerinden yapılan hiçbir veri
+            aktarımının %100 güvenli olamayacağını unutmayın.
+          </p>
+        </section>
 
-        <p>Toplanan kişisel bilgileri aşağıdaki amaçlarla kullanabiliriz:</p>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">6. KULLANICI HAKLARI</h2>
+          <p>Kullanıcılar, aşağıdaki haklara sahiptir:</p>
+          <ul className="list-disc list-inside mt-4">
+            <li>Kişisel verilerine erişim hakkı.</li>
+            <li>
+              Yanlış veya eksik bilgilerin düzeltilmesini talep etme hakkı.
+            </li>
+            <li>
+              Belirli durumlarda kişisel verilerinin silinmesini talep etme
+              hakkı.
+            </li>
+            <li>Veri işleme faaliyetlerine itiraz etme hakkı.</li>
+          </ul>
+        </section>
 
-        <ul>
-          <li>Hizmetlerimizi sunmak ve geliştirmek.</li>
-          <li>Kullanıcı deneyimini iyileştirmek.</li>
-          <li>Sorularınızı ve taleplerinizi yanıtlamak.</li>
-          <li>Yasal gerekliliklere uyum sağlamak.</li>
-        </ul>
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">
+            7. GİZLİLİK POLİTİKASINDA DEĞİŞİKLİKLER
+          </h2>
+          <p>
+            Gizlilik politikasında değişiklik yapma hakkımız saklıdır. Politika
+            değişiklikleri bu sayfada yayınlanacaktır. Değişiklikler yapıldıktan
+            sonra hizmetlerimizi kullanmaya devam ederek yeni şartları kabul
+            etmiş sayılırsınız.
+          </p>
+        </section>
 
-        <h2>3. Bilgilerin Paylaşımı</h2>
-
-        <p>
-          Kişisel bilgilerinizi üçüncü taraflarla paylaşmayız, ancak aşağıdaki
-          durumlarda paylaşabiliriz:
-        </p>
-
-        <ul>
-          <li>Yasal yükümlülüklere uymak amacıyla.</li>
-          <li>
-            Hizmet sağlayıcılarla hizmetleri sunabilmek için (örneğin,
-            barındırma sağlayıcıları, analiz hizmetleri).
-          </li>
-        </ul>
-
-        <h2>4. Çerezler</h2>
-
-        <p>
-          Web sitemizde çerezler kullanılabilir. Çerezler, web sitemizi ziyaret
-          ettiğinizde tarayıcınıza gönderilen küçük veri dosyalarıdır. Çerezler,
-          web sitemizin kullanımını analiz etmemize ve deneyiminizi
-          kişiselleştirmemize yardımcı olur. Tarayıcınızın ayarlarını kullanarak
-          çerezleri devre dışı bırakabilirsiniz, ancak bu durumda web sitemizin
-          bazı özellikleri düzgün çalışmayabilir.
-        </p>
-
-        <h2>5. Üçüncü Taraf Bağlantılar</h2>
-
-        <p>
-          Web sitemiz, üçüncü taraf web sitelerine bağlantılar içerebilir. Bu
-          sitelerin gizlilik uygulamaları bizim kontrolümüz dışında olduğundan,
-          bu üçüncü taraf sitelerin gizlilik politikalarını incelemenizi
-          öneririz.
-        </p>
-
-        <h2>6. Güvenlik</h2>
-
-        <p>
-          Kişisel bilgilerinizin güvenliğini sağlamak için uygun önlemler
-          alıyoruz. Ancak, internet üzerinden iletilen verilerin tamamen güvenli
-          olduğunu garanti edemeyiz.
-        </p>
-
-        <h2>7. Haklarınız</h2>
-
-        <p>
-          Kişisel verilerinize erişme, bunları düzeltme veya silme hakkına
-          sahipsiniz. Bu haklarınızı kullanmak için bizimle iletişime
-          geçebilirsiniz.
-        </p>
-
-        <h2>8. İletişim</h2>
-
-        <p>
-          Gizlilik politikamız hakkında sorularınız veya endişeleriniz varsa,{" "}
-          <a href="mailto:youremail@example.com">youremail@example.com</a>{" "}
-          üzerinden bizimle iletişime geçebilirsiniz.
-        </p>
-
-        <h2>9. Değişiklikler</h2>
-
-        <p>
-          Bu Gizlilik Politikası, zaman zaman güncellenebilir. Değişiklikler,
-          web sitemizde yayınlandıktan sonra yürürlüğe girer.
-        </p>
+        <footer className="text-center mt-8">
+          <p className="text-sm text-gray-500">
+            © 2024 Vitrinim.co Tüm hakları saklıdır.
+          </p>
+        </footer>
       </div>
     </div>
   );
